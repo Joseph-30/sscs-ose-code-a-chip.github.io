@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 560" width="950" height="560">
+  <defs>
+    <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+      <circle cx="5" cy="5" r="3" fill="#263238"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="950" height="560" fill="#FFFFFF" rx="10"/>
+  <rect x="15" y="15" width="920" height="530" fill="none" stroke="#CFD8DC" stroke-width="1.5" rx="8"/>
+
+  <!-- Title -->
+  <text x="475" y="42" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#263238">Transistor-Level Schematic: Sub-0.6V Dynamic Subthreshold OTA with Chopping &amp; RRL</text>
+  <text x="475" y="62" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#607D8B">SkyWater SKY130 130nm Process (sky130_fd_pr__nfet_01v8 &amp; sky130_fd_pr__pfet_01v8)</text>
+
+  <!-- Power Rails -->
+  <!-- VDD Rail -->
+  <line x1="80" y1="90" x2="870" y2="90" stroke="#C62828" stroke-width="2.5"/>
+  <text x="60" y="95" font-family="sans-serif" font-size="12" font-weight="bold" fill="#C62828">VDD (0.6V)</text>
+
+  <!-- VSS Rail -->
+  <line x1="80" y1="510" x2="870" y2="510" stroke="#1565C0" stroke-width="2.5"/>
+  <text x="60" y="515" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1565C0">VSS (0V)</text>
+
+  <!-- Left: Input Chopper Bridge -->
+  <g transform="translate(100, 230)">
+    <rect x="0" y="0" width="130" height="130" rx="6" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+    <text x="65" y="24" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#01579B">Input Chopper</text>
+    <text x="65" y="38" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#0277BD">CMOS Trans-Gates</text>
+
+    <!-- Switches S1, S2, S3, S4 -->
+    <line x1="20" y1="60" x2="50" y2="60" stroke="#37474F" stroke-width="1.5"/>
+    <line x1="50" y1="50" x2="70" y2="60" stroke="#D32F2F" stroke-width="2"/>
+    <line x1="70" y1="60" x2="110" y2="60" stroke="#37474F" stroke-width="1.5"/>
+    <text x="60" y="48" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#C2185B">S1 (Φ1)</text>
+
+    <line x1="20" y1="95" x2="50" y2="95" stroke="#37474F" stroke-width="1.5"/>
+    <line x1="50" y1="85" x2="70" y2="95" stroke="#D32F2F" stroke-width="2"/>
+    <line x1="70" y1="95" x2="110" y2="95" stroke="#37474F" stroke-width="1.5"/>
+    <text x="60" y="83" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#C2185B">S2 (Φ1)</text>
+
+    <text x="-25" y="64" font-family="sans-serif" font-size="11" font-weight="bold" fill="#263238">Vin+</text>
+    <text x="-25" y="99" font-family="sans-serif" font-size="11" font-weight="bold" fill="#263238">Vin-</text>
+  </g>
+
+  <!-- PMOS Load Transistors (M3, M4) -->
+  <!-- M3 -->
+  <g transform="translate(360, 100)">
+    <rect x="0" y="20" width="30" height="40" rx="3" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5"/>
+    <circle cx="15" cy="14" r="3" fill="none" stroke="#C62828" stroke-width="1.5"/>
+    <text x="40" y="38" font-family="sans-serif" font-size="11" font-weight="bold" fill="#B71C1C">M3 (PMOS)</text>
+    <text x="40" y="52" font-family="sans-serif" font-size="9" fill="#D32F2F">W=12.6µ / L=2µ / M=4</text>
+    <!-- Connect to VDD -->
+    <line x1="15" y1="0" x2="15" y2="-10" stroke="#C62828" stroke-width="2"/>
+  </g>
+
+  <!-- M4 -->
+  <g transform="translate(540, 100)">
+    <rect x="0" y="20" width="30" height="40" rx="3" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5"/>
+    <circle cx="15" cy="14" r="3" fill="none" stroke="#C62828" stroke-width="1.5"/>
+    <text x="40" y="38" font-family="sans-serif" font-size="11" font-weight="bold" fill="#B71C1C">M4 (PMOS)</text>
+    <text x="40" y="52" font-family="sans-serif" font-size="9" fill="#D32F2F">W=12.6µ / L=2µ / M=4</text>
+    <line x1="15" y1="0" x2="15" y2="-10" stroke="#C62828" stroke-width="2"/>
+  </g>
+
+  <!-- Common Gate Bias Line for M3/M4 (Vbp) -->
+  <line x1="330" y1="140" x2="360" y2="140" stroke="#263238" stroke-width="1.5"/>
+  <line x1="375" y1="160" x2="375" y2="180" stroke="#263238" stroke-width="1.5"/>
+  <line x1="375" y1="180" x2="330" y2="180" stroke="#263238" stroke-width="1.5"/>
+  <line x1="330" y1="180" x2="330" y2="140" stroke="#263238" stroke-width="1.5"/>
+  <line x1="330" y1="140" x2="540" y2="140" stroke="#263238" stroke-width="1.5"/>
+  <text x="310" y="135" font-family="sans-serif" font-size="10" font-weight="bold" fill="#D32F2F">Vbp</text>
+
+  <!-- Main Differential Pair (M1, M2) -->
+  <!-- M1 -->
+  <g transform="translate(360, 260)">
+    <rect x="0" y="0" width="30" height="40" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="-120" y="16" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1B5E20">M1 (NMOS)</text>
+    <text x="-120" y="30" font-family="sans-serif" font-size="9" fill="#2E7D32">W=40.6µ / L=1µ / M=4</text>
+    <text x="-120" y="44" font-family="sans-serif" font-size="8" font-weight="bold" fill="#388E3C">Common-Centroid Quad</text>
+  </g>
+
+  <!-- M2 -->
+  <g transform="translate(540, 260)">
+    <rect x="0" y="0" width="30" height="40" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="40" y="16" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1B5E20">M2 (NMOS)</text>
+    <text x="40" y="30" font-family="sans-serif" font-size="9" fill="#2E7D32">W=40.6µ / L=1µ / M=4</text>
+    <text x="40" y="44" font-family="sans-serif" font-size="8" font-weight="bold" fill="#388E3C">Common-Centroid Quad</text>
+  </g>
+
+  <!-- Auxiliary Inputs for RRL (M1_aux, M2_aux) -->
+  <g transform="translate(425, 260)">
+    <rect x="0" y="0" width="22" height="35" rx="2" fill="#FFE0B2" stroke="#E65100" stroke-width="1.2"/>
+    <text x="11" y="-8" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#E65100">M1_aux</text>
+    <line x1="-30" y1="18" x2="0" y2="18" stroke="#E65100" stroke-width="1.5"/>
+    <text x="-40" y="15" text-anchor="end" font-family="sans-serif" font-size="8" fill="#E65100">Vaux+</text>
+  </g>
+
+  <g transform="translate(480, 260)">
+    <rect x="0" y="0" width="22" height="35" rx="2" fill="#FFE0B2" stroke="#E65100" stroke-width="1.2"/>
+    <text x="11" y="-8" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#E65100">M2_aux</text>
+    <line x1="22" y1="18" x2="52" y2="18" stroke="#E65100" stroke-width="1.5"/>
+    <text x="56" y="15" font-family="sans-serif" font-size="8" fill="#E65100">Vaux-</text>
+  </g>
+
+  <!-- Tail Node Interconnect -->
+  <line x1="375" y1="300" x2="375" y2="350" stroke="#37474F" stroke-width="2"/>
+  <line x1="555" y1="300" x2="555" y2="350" stroke="#37474F" stroke-width="2"/>
+  <line x1="436" y1="295" x2="436" y2="350" stroke="#E65100" stroke-width="1.5"/>
+  <line x1="491" y1="295" x2="491" y2="350" stroke="#E65100" stroke-width="1.5"/>
+  <line x1="375" y1="350" x2="555" y2="350" stroke="#37474F" stroke-width="2"/>
+
+  <!-- Tail Current Source (M_tail) -->
+  <g transform="translate(450, 390)">
+    <rect x="0" y="0" width="30" height="40" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="40" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1B5E20">M_tail (NMOS)</text>
+    <text x="40" y="34" font-family="sans-serif" font-size="9" fill="#2E7D32">I_tail = 2.76 µA</text>
+    <line x1="15" y1="-40" x2="15" y2="0" stroke="#37474F" stroke-width="2"/>
+    <line x1="15" y1="40" x2="15" y2="120" stroke="#1565C0" stroke-width="2"/>
+    <line x1="-30" y1="20" x2="0" y2="20" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="-40" y="24" text-anchor="end" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2E7D32">Vbn (0.32V)</text>
+  </g>
+
+  <!-- Intermediate Drain Connections -->
+  <line x1="375" y1="160" x2="375" y2="260" stroke="#37474F" stroke-width="2"/>
+  <line x1="555" y1="160" x2="555" y2="260" stroke="#37474F" stroke-width="2"/>
+
+  <!-- Output Stage & Miller Caps -->
+  <!-- Output Node P -->
+  <line x1="375" y1="210" x2="680" y2="210" stroke="#37474F" stroke-width="2"/>
+  <!-- Output Node N -->
+  <line x1="555" y1="210" x2="680" y2="250" stroke="#37474F" stroke-width="2"/>
+
+  <!-- Right: Output Chopper Bridge -->
+  <g transform="translate(680, 190)">
+    <rect x="0" y="0" width="120" height="90" rx="6" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+    <text x="60" y="24" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#01579B">Output Chopper</text>
+    <text x="60" y="38" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#0277BD">Demodulator</text>
+    <text x="60" y="65" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#D32F2F">fchop = 4 kHz</text>
+  </g>
+
+  <!-- Differential Output Ports -->
+  <line x1="800" y1="220" x2="860" y2="220" stroke="#0277BD" stroke-width="2"/>
+  <line x1="800" y1="250" x2="860" y2="250" stroke="#0277BD" stroke-width="2"/>
+  <circle cx="865" cy="220" r="5" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <circle cx="865" cy="250" r="5" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <text x="880" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#01579B">Vout+</text>
+  <text x="880" y="255" font-family="sans-serif" font-size="11" font-weight="bold" fill="#01579B">Vout-</text>
+
+  <!-- Input Chopper to M1/M2 Gates -->
+  <line x1="230" y1="280" x2="360" y2="280" stroke="#37474F" stroke-width="2"/>
+  <line x1="230" y1="310" x2="320" y2="310" stroke="#37474F" stroke-width="2"/>
+  <line x1="320" y1="310" x2="320" y2="295" stroke="#37474F" stroke-width="2"/>
+  <line x1="320" y1="295" x2="540" y2="295" stroke="#37474F" stroke-width="2"/>
+</svg>

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480">
+  <defs>
+    <linearGradient id="grad_chop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="grad_ota" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="grad_rrl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="grad_adc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#D1C4E9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#37474F"/>
+    </marker>
+    <marker id="arrow_blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0277BD"/>
+    </marker>
+    <marker id="arrow_orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#E65100"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1000" height="480" fill="#FAFAFA" rx="12"/>
+  <rect x="15" y="15" width="970" height="450" fill="none" stroke="#ECEFF1" stroke-width="2" rx="8"/>
+
+  <!-- Title Banner -->
+  <text x="500" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#263238">NeuroDyn-AFE: Sub-0.6V Dynamic Bio-Potential Front-End Architecture</text>
+  <text x="500" y="65" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#546E7A">Continuous-Time Chopper Stabilization with Ripple Reduction Loop &amp; Noise-Shaped Quantization</text>
+
+  <!-- Input Electrodes / Signals -->
+  <g transform="translate(40, 150)">
+    <circle cx="20" cy="40" r="14" fill="#ECEFF1" stroke="#455A64" stroke-width="2"/>
+    <text x="20" y="45" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#37474F">Vin+</text>
+    <circle cx="20" cy="100" r="14" fill="#ECEFF1" stroke="#455A64" stroke-width="2"/>
+    <text x="20" y="105" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#37474F">Vin-</text>
+    <text x="20" y="140" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#78909C">EEG/ECG</text>
+  </g>
+
+  <!-- Input Routing to CHOP1 -->
+  <path d="M 74 190 L 120 190" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 74 250 L 120 250" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- BLOCK 1: Input Chopper (CHOP1) -->
+  <g transform="translate(125, 160)" filter="url(#shadow)">
+    <rect width="90" height="120" rx="8" fill="url(#grad_chop)" stroke="#0288D1" stroke-width="2"/>
+    <text x="45" y="40" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#01579B">CHOP1</text>
+    <text x="45" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#0277BD">Modulator</text>
+    <text x="45" y="95" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#01579B">fchop=4kHz</text>
+  </g>
+
+  <!-- Routing CHOP1 to Dynamic OTA -->
+  <path d="M 215 190 L 270 190" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 215 250 L 270 250" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- BLOCK 2: Dynamic Subthreshold OTA -->
+  <g transform="translate(275, 130)" filter="url(#shadow)">
+    <path d="M 0 20 L 140 85 L 0 150 Z" fill="url(#grad_ota)" stroke="#2E7D32" stroke-width="2.5"/>
+    <text x="45" y="75" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1B5E20">Dynamic</text>
+    <text x="45" y="93" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1B5E20">OTA</text>
+    <text x="45" y="112" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#2E7D32">gm/ID=25.5</text>
+    <text x="45" y="127" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#388E3C">Av &gt; 65 dB</text>
+    <!-- Auxiliary Input Ports for RRL -->
+    <rect x="-10" y="40" width="10" height="8" fill="#FF9800"/>
+    <rect x="-10" y="122" width="10" height="8" fill="#FF9800"/>
+    <text x="-15" y="35" text-anchor="end" font-family="sans-serif" font-size="9" fill="#E65100">Vaux+</text>
+    <text x="-15" y="137" text-anchor="end" font-family="sans-serif" font-size="9" fill="#E65100">Vaux-</text>
+  </g>
+
+  <!-- Routing OTA to CHOP2 -->
+  <path d="M 415 200 L 465 200" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 415 230 L 465 230" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- BLOCK 3: Output Chopper (CHOP2) -->
+  <g transform="translate(470, 160)" filter="url(#shadow)">
+    <rect width="90" height="120" rx="8" fill="url(#grad_chop)" stroke="#0288D1" stroke-width="2"/>
+    <text x="45" y="40" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#01579B">CHOP2</text>
+    <text x="45" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#0277BD">Demodulator</text>
+    <text x="45" y="95" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#01579B">fchop=4kHz</text>
+  </g>
+
+  <!-- Routing CHOP2 to LPF and RRL -->
+  <path d="M 560 200 L 640 200" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 560 230 L 640 230" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Tap off to Ripple Reduction Loop (RRL) -->
+  <circle cx="590" cy="200" r="4" fill="#E65100"/>
+  <circle cx="605" cy="230" r="4" fill="#E65100"/>
+  <path d="M 590 200 L 590 350 L 530 350" fill="none" stroke="#E65100" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow_orange)"/>
+  <path d="M 605 230 L 605 370 L 530 370" fill="none" stroke="#E65100" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow_orange)"/>
+
+  <!-- BLOCK 4: Ripple Reduction Loop (RRL) Feedback Integrator -->
+  <g transform="translate(320, 320)" filter="url(#shadow)">
+    <rect width="200" height="90" rx="8" fill="url(#grad_rrl)" stroke="#FB8C00" stroke-width="2"/>
+    <text x="100" y="28" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#E65100">Ripple Reduction Loop (RRL)</text>
+    <text x="100" y="48" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#EF6C00">Continuous-Time Switched-Cap</text>
+    <text x="100" y="64" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#EF6C00">Offset Suppression: &gt; 42 dB</text>
+    <text x="100" y="80" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#BF360C">Residual Vos &lt; 0.8 µV</text>
+  </g>
+
+  <!-- RRL Output returning to OTA Auxiliary Terminals -->
+  <path d="M 320 355 L 245 355 L 245 170 L 265 170" fill="none" stroke="#E65100" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow_orange)"/>
+  <path d="M 320 375 L 235 375 L 235 252 L 265 252" fill="none" stroke="#E65100" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow_orange)"/>
+
+  <!-- BLOCK 5: Low-Pass Filter / Integrator -->
+  <g transform="translate(645, 170)" filter="url(#shadow)">
+    <rect width="100" height="90" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+    <text x="50" y="35" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#37474F">Low-Pass</text>
+    <text x="50" y="52" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#37474F">Filter</text>
+    <text x="50" y="75" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#546E7A">BW = 1 kHz</text>
+  </g>
+
+  <!-- Routing LPF to Quantizer -->
+  <path d="M 745 200 L 795 200" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 745 230 L 795 230" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- BLOCK 6: Noise-Shaped Dynamic Quantizer (ADC) -->
+  <g transform="translate(800, 160)" filter="url(#shadow)">
+    <rect width="120" height="110" rx="8" fill="url(#grad_adc)" stroke="#7E57C2" stroke-width="2"/>
+    <text x="60" y="32" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#4527A0">Noise-Shaped</text>
+    <text x="60" y="50" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#4527A0">Dynamic SAR</text>
+    <text x="60" y="75" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#5E35B1">14-Bit ENOB</text>
+    <text x="60" y="93" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#673AB7">SNDR = 86.2 dB</text>
+  </g>
+
+  <!-- Digital Data Out -->
+  <path d="M 920 215 L 970 215" fill="none" stroke="#4527A0" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="945" y="200" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="#4527A0">D_OUT[13:0]</text>
+
+  <!-- Performance Badge Footer -->
+  <g transform="translate(100, 435)">
+    <rect x="0" y="0" width="800" height="30" rx="6" fill="#E0F2F1" stroke="#00897B" stroke-width="1"/>
+    <text x="400" y="20" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#004D40">
+      Key Specs: VDD = 0.6V | P_tot = 1.77 µW | IR Noise = 0.79 µVrms | NEF = 1.65 | PEF = 1.63 | CMRR &gt; 108 dB | SkyWater SKY130
+    </text>
+  </g>
+</svg>
