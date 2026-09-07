@@ -304,23 +304,56 @@ class NeuroDynLayoutGenerator:
                         legend_patches.append(patches.Patch(facecolor=col, edgecolor="#263238", label=label, alpha=alpha))
                     handled_layers.add(key)
                     
-        # Add device finger labels above gates
+        # Add device finger labels above gates with styled pill badges
         if gate_positions:
             for x_pos, dev_id in gate_positions:
                 color = "#C62828" if dev_id == 'A' else ("#1565C0" if dev_id == 'B' else "#616161")
-                ax.text(x_pos + 0.5, 14.5, dev_id, ha='center', va='bottom', fontsize=8, fontweight='bold', color=color)
+                ax.text(
+                    x_pos + 0.5, 14.5, dev_id, ha='center', va='center',
+                    fontsize=8, fontweight='bold', color=color,
+                    bbox=dict(boxstyle="circle,pad=0.22", facecolor="#FFFFFF", edgecolor=color, linewidth=1.0)
+                )
 
-        ax.text(13.0, 16.5, "Common-Centroid Input Pair: [D, A, B, B, A, B, A, A, B, D]", ha='center', fontsize=9, fontweight='bold', color="#1B5E20")
-        ax.text(32.0, 16.5, "Low-Vt Chopper", ha='center', fontsize=9, fontweight='bold', color="#E65100")
-        ax.text(53.0, 16.5, "RRL MIM Cap Array", ha='center', fontsize=9, fontweight='bold', color="#0D47A1")
+        # Block Titles with pristine rounded background badges centered over each block
+        ax.text(
+            13.0, 19.5, "Common-Centroid M1/M2 Input Pair",
+            ha='center', va='center', fontsize=8.5, fontweight='bold', color="#1B5E20",
+            bbox=dict(boxstyle="round,pad=0.35", facecolor="#E8F5E9", edgecolor="#388E3C", linewidth=1.0)
+        )
+        ax.text(
+            41.0, 19.5, "Low-Vt Chopper (CHOP1)",
+            ha='center', va='center', fontsize=8.5, fontweight='bold', color="#E65100",
+            bbox=dict(boxstyle="round,pad=0.35", facecolor="#FFF3E0", edgecolor="#FB8C00", linewidth=1.0)
+        )
+        ax.text(
+            62.0, 19.5, "RRL MIM Cap Array (89/44)",
+            ha='center', va='center', fontsize=8.5, fontweight='bold', color="#0D47A1",
+            bbox=dict(boxstyle="round,pad=0.35", facecolor="#E3F2FD", edgecolor="#1E88E5", linewidth=1.0)
+        )
+
+        # 10 µm Physical Scale Bar placed in clear open space below the chopper
+        ax.plot([36.0, 46.0], [-3.5, -3.5], color="#263238", linewidth=2.5)
+        ax.plot([36.0, 36.0], [-4.2, -2.8], color="#263238", linewidth=1.5)
+        ax.plot([46.0, 46.0], [-4.2, -2.8], color="#263238", linewidth=1.5)
+        ax.text(41.0, -2.4, "10 µm Scale Bar", ha="center", va="bottom", fontsize=8.5, fontweight="bold", color="#263238")
+
+        # LVS Pin Callouts with Directed Arrows (placed outside layout with ha='right')
+        ax.annotate("INP (Met2)", xy=(0.5, 10.9), xytext=(-5.2, 10.9), ha="right", va="center",
+                    arrowprops=dict(arrowstyle="->", color="#1565C0", lw=1.2), fontsize=8, fontweight="bold", color="#1565C0")
+        ax.annotate("INM (Met2)", xy=(0.5, 12.1), xytext=(-5.2, 12.5), ha="right", va="center",
+                    arrowprops=dict(arrowstyle="->", color="#1565C0", lw=1.2), fontsize=8, fontweight="bold", color="#1565C0")
+        ax.annotate("VSS Guard Ring", xy=(-4.0, 2.0), xytext=(-5.2, 2.0), ha="right", va="center",
+                    arrowprops=dict(arrowstyle="->", color="#2E7D32", lw=1.2), fontsize=8, fontweight="bold", color="#2E7D32")
         
         ax.set_aspect('equal')
         ax.autoscale()
+        ax.set_xlim(-12.0, 78.0)
+        ax.set_ylim(-6.5, 22.5)
         ax.set_xlabel("X Coordinate (µm)", fontsize=11, fontweight='bold')
         ax.set_ylabel("Y Coordinate (µm)", fontsize=11, fontweight='bold')
-        ax.set_title("NeuroDyn-AFE: DRC-Clean Silicon Layout (SkyWater SKY130 130nm)", fontsize=13, fontweight='bold', pad=12)
+        ax.set_title("NeuroDyn-AFE: DRC-Clean Silicon Layout (SkyWater SKY130 130nm PDK)", fontsize=12.5, fontweight='bold', pad=12)
         ax.grid(True, linestyle=':', alpha=0.5)
-        ax.legend(handles=legend_patches, loc='upper right', bbox_to_anchor=(1.30, 1.0), fontsize=8.5)
+        ax.legend(handles=legend_patches, loc='upper right', bbox_to_anchor=(1.28, 1.0), fontsize=8.5)
         
         plt.tight_layout()
         plt.savefig(img_path, bbox_inches='tight')
